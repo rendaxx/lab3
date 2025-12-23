@@ -127,11 +127,11 @@ defmodule MyLab3.CLI do
     Flags:
       --linear              Enable piecewise linear interpolation (default when no flags)
       --newton              Enable Newton sliding window interpolation
-      -n, --window N        Window size for Newton (default #{ @defaults.window })
-      --step S              Sampling step for output x values (default #{ @defaults.step })
-      --delimiter MODE      Input delimiter: auto|comma|semicolon|tab|space (default #{ @defaults.delimiter })
-      --precision K         Significant digits for output (default #{ @defaults.precision })
-      --format FORMAT       Output format: space|csv|tsv (default #{ @defaults.format })
+      -n, --window N        Window size for Newton (default #{@defaults.window})
+      --step S              Sampling step for output x values (default #{@defaults.step})
+      --delimiter MODE      Input delimiter: auto|comma|semicolon|tab|space (default #{@defaults.delimiter})
+      --precision K         Significant digits for output (default #{@defaults.precision})
+      --format FORMAT       Output format: space|csv|tsv (default #{@defaults.format})
       --help                Show this message
 
     Examples:

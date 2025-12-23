@@ -64,14 +64,24 @@ defmodule MyLab3.Worker.Newton do
     center = window_center(window_points, state.window)
 
     next_window_points = Enum.slice(state.points, 1, state.window)
-    right_center = if length(next_window_points) == state.window, do: window_center(next_window_points, state.window)
+
+    right_center =
+      if length(next_window_points) == state.window,
+        do: window_center(next_window_points, state.window)
 
     left_boundary = state.prev_center || first_x(window_points)
     right_boundary = right_boundary(center, right_center, last_x(window_points))
     inclusive = inclusive_right or right_center == nil
 
     {outputs, next_x} =
-      sample_window(window_points, left_boundary, right_boundary, state.next_x, state.step, inclusive)
+      sample_window(
+        window_points,
+        left_boundary,
+        right_boundary,
+        state.next_x,
+        state.step,
+        inclusive
+      )
 
     Enum.each(outputs, fn {x, y} ->
       send(state.printer, {:out, "newton", x, y})
@@ -83,7 +93,10 @@ defmodule MyLab3.Worker.Newton do
   defp sample_window(points, left, right, next_x, step, inclusive) do
     coeffs = Newton.coefficients(points)
     xs = Enum.map(points, fn {x, _y} -> x end)
-    Sampler.sample_interval(left, right, next_x, step, inclusive, fn x -> Newton.eval(coeffs, xs, x) end)
+
+    Sampler.sample_interval(left, right, next_x, step, inclusive, fn x ->
+      Newton.eval(coeffs, xs, x)
+    end)
   end
 
   defp window_center(points, window) do

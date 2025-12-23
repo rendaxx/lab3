@@ -15,7 +15,14 @@ defmodule MyLab3.IntegrationTest do
     {:ok, output_dev} = StringIO.open("")
     {:ok, err_dev} = StringIO.open("")
 
-    exit_code = CLI.run(["--linear", "--newton", "--window", "4", "--step", "1.0"], input_dev, output_dev, err_dev)
+    exit_code =
+      CLI.run(
+        ["--linear", "--newton", "--window", "4", "--step", "1.0"],
+        input_dev,
+        output_dev,
+        err_dev
+      )
+
     assert exit_code == 0
 
     {_in, output} = StringIO.contents(output_dev)

@@ -38,7 +38,8 @@ defmodule MyLab3.Pipeline do
     wait_for_completion(%{exit_code: 0, printer_done: false, coordinator_done: false})
   end
 
-  defp wait_for_completion(%{printer_done: true, coordinator_done: true, exit_code: code}), do: code
+  defp wait_for_completion(%{printer_done: true, coordinator_done: true, exit_code: code}),
+    do: code
 
   defp wait_for_completion(state) do
     receive do

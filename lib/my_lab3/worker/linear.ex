@@ -31,7 +31,11 @@ defmodule MyLab3.Worker.Linear do
   end
 
   defp handle_point(%{prev: nil} = state, point) do
-    %{state | prev: point, next_x: state.next_x || Sampler.init_next_x(elem(point, 0), state.step)}
+    %{
+      state
+      | prev: point,
+        next_x: state.next_x || Sampler.init_next_x(elem(point, 0), state.step)
+    }
   end
 
   defp handle_point(state, point) do
